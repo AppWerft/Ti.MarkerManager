@@ -3,22 +3,22 @@ Ti.MarkerManager
 
 Ti.MarkerManager is a library for Appcelerator Titanium for realizing to display a lot of annotations on map.
 ~~~
-var Manager = new MarkerManager({
+var Layer = new MarkerManager({
     name : 'groupname',
     points : points,   // array of annotation properties
     image : '/images/car2go.png',
     maxannotations : 200,
     map : mapview // reference to mapview
 });
-Manager.addEventListener('start',function(){
+Layer.addEventListener('start',function(){
     // do something like showing spinner
 });
-Manager.addEventListener('complete',function(){
+Layer.addEventListener('complete',function(){
 // do something like hiding spinner
 });
 
 // you can remove this layer with:
-Manager.destroy();   
+Layer.destroy();   
 ~~~
 
 See at app.js for more details. Currently you can only staticly display annotations. 
