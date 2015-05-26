@@ -26,13 +26,17 @@ var Module = function(options) {
     this.maxannotations = options.maxannotations || 100;
     if ( typeof options.map == 'object' && options.map.apiName && options.map.apiName == 'Ti.Proxy')
         this.map = options.map;
-    this.points = options.points;
+
     this.image = options.image;
     this.rightImage = options.rightImage;
     this.markers_in_map = {};
     this.eventhandlers = {};
 
-    this._importData();
+    if (options.points) {
+        this.points = options.points;
+        for (var i = 0; i < this.points.length; i++)
+            this.points[i].id = this.points.id || i;
+    }
     this._startMap();
     var that = this;
     var handleRegionChanged = function(_region) {
@@ -54,7 +58,13 @@ var Module = function(options) {
 };
 
 Module.prototype = {
-    destroy : function() {
+    setMarkers : function(points) {
+        this.points = points;
+        for (var i = 0; i < this.points.length; i++)
+            this.points[i].id = this.points.id || i;
+
+    },
+    removeAllMarkers : function() {
         this.removeRegionChangedHandler();
         var annotations = [];
         for (id in this.markers_in_map) {
@@ -64,13 +74,6 @@ Module.prototype = {
         }
         this.map.removeAnnotations(annotations);
         this.markers_in_map = null;
-    },
-    _importData : function() {
-        var t_start = new Date().getTime();
-        for (var i = 0; i < this.points.length; i++)
-            this.points[i].id = i;
-        var t_end = new Date().getTime();
-        console.log('MarkerManger: importData ' + (t_end - t_start) + ' ms.');
     },
     _startMap : function() {
         var region = this.map.getRegion();
