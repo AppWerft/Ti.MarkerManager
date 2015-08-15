@@ -2,6 +2,8 @@ Ti.MarkerManager
 ================
 
 Ti.MarkerManager is a library for Appcelerator Titanium for realizing to display a lot of annotations on map.
+
+This is the repo fittng to the [meetup of Hamburg Titanium Group](http://www.meetup.com/de/Hamburg-Titanium/events/223965086/).
 ~~~
 var Layer = new MarkerManager({
     image : '/images/car2go.png',
