@@ -12,14 +12,26 @@ Usage:
 ======
 
 
-First you have to install it by:
+First you add de.appwerft.markermanager in your tiapp.xml.
+
+Now you open a terminal window in your project and
+~~~
+gittio install -g 
+~~~
+
+
+It will install all missing modules and widgets required by your tiapp.xml and app/config.json files. In our case it will install de.appwerft.markermanager
+
+If gittio is missing in your system:
 
 ~~~
-gittio install de.appwerft.markermanager
+sudo npm install -g gittio
 ~~~
 
-Then you have to include it in tiapp.xml.
+If npm is missing you download it from [here](http://coolestguidesontheplanet.com/installing-node-js-osx-10-9-mavericks/).
 
+
+Now you can use it:
 ~~~
 var MarkerMananger = require('de.appwerft.markermanager');
 
