@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "titaniumManifest" : {
+      "name": "Ti.MarkerManager",
+      "moduleid": "de.appwerft.markermanager",
       "guid" : "129ce90d-7bac-deb4-7b28-0dcd49dca087"
   },
   "nativeDependencies": {

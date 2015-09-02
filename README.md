@@ -1,7 +1,6 @@
 Ti.MarkerManager
 ================
 
-
 ![](https://github.com/AppWerft/Ti.MarkerManager/raw/master/markermanager.gif)
 
 
@@ -9,10 +8,21 @@ Ti.MarkerManager
 
 This repo supports the [meetup of Hamburg Titanium Group](http://www.meetup.com/de/Hamburg-Titanium/events/223965086/).
 
-Usage
-=====
+Usage:
+======
+
+
+First you have to install it by:
 
 ~~~
+gittio install de.appwerft.markermanager
+~~~
+
+Then you have to include it in tiapp.xml.
+
+~~~
+var MarkerMananger = require('de.appwerft.markermanager');
+
 var Overlay = new MarkerManager({
     image : '/images/car2go.png',
     maxannotations : 200,
