@@ -23,23 +23,19 @@ var Map = require('ti.map');
 
 var Module = function(options) {
 	this.name = options.name;
-	/* default depending on smartphone "power" */
 	this.maxannotations = options.maxannotations || Ti.Platform.displayCaps.logicalDensityFactor * 60;
 	if ( typeof options.map == 'object' && options.map.apiName && options.map.apiName == 'Ti.Proxy')
 		this.map = options.map;
 	this.points = options.points;
-	/* add Id if missing */
-	for (var i = 0; i < this.points.length; i++)
-		if (this.points[i].id == undefined)
-			this.points[i].id = i;
 	this.image = options.image;
 	this.rightImage = options.rightImage;
 	this.markers_in_map = {};
 	this.eventhandlers = {};
-	this._initOverlay();
+	this._importData();
+	this._startMap();
 	var that = this;
 	var handleRegionChanged = function(_region) {
-		that._updateOverlay(_region);
+		that._updateMap(_region);
 	};
 	this.removeRegionChangedHandler = function() {
 		this.map.removeEventListener('regionchanged', handleRegionChanged);
@@ -67,20 +63,24 @@ Module.prototype = {
 		this.map.removeAnnotations(annotations);
 		this.markers_in_map = null;
 	},
-	_initOverlay : function() {
+	_importData : function() {
+		var t_start = new Date().getTime();
+		for (var i = 0; i < this.points.length; i++)
+			this.points[i].id = i;
+		var t_end = new Date().getTime();
+		console.log('MarkerManger: importData ' + (t_end - t_start) + ' ms.');
+	},
+	_startMap : function() {
 		var region = this.map.getRegion();
-		this._updateOverlay({
+		this._updateMap({
 			latitude : region.latitude,
 			longitude : region.longitude,
 			latitudeDelta : region.latitudeDelta,
 			longitudeDelta : region.longitudeDelta,
 		});
 	},
-	_updateOverlay : function(region) {
+	_updateMap : function(region) {
 		this.fireEvent('start');
-		if (this.onstart && typeof this.onstart == 'function') {
-			this.onstart();
-		}
 		var t_start = new Date().getTime();
 		var array_of_markers_in_range = [];
 		var south = region.latitude - region.latitudeDelta / 2;
@@ -182,9 +182,6 @@ Module.prototype = {
 		var t_end = new Date().getTime();
 		console.log('MarkerManger: rendering time ' + (t_end - t_start) + ' ms.');
 		this.fireEvent('complete');
-		if (this.oncomplete && typeof this.oncomplete == 'function') {
-			this.oncomplete();
-		}
 	},
 	fireEvent : function(_event, _payload) {
 		if (this.eventhandlers[_event]) {

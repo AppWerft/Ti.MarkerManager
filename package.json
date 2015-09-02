@@ -1,0 +1,25 @@
+{
+  "name": "Ti.MarkerManager",
+  "version": "1.0.0",
+  "description": "This module allows to display more then 1000 annotations on a map. Depending on region changes the rendering.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "titaniumManifest" : {
+      "guid" : "129ce90d-7bac-deb4-7b28-0dcd49dca087"
+  },
+  "nativeDependencies": {
+    "ti.map" : "*"
+  },
+  "keywords": [
+    "Appcelerator",
+    "Titanium",
+    "Map",
+    "MarkerManager",
+    "ClusterManager"
+  ],
+  
+  "author": "Rainer Schleevoigt",
+  "license": "MIT"
+}

@@ -5,19 +5,19 @@ Ti.MarkerManager
 
 This repo supports the [meetup of Hamburg Titanium Group](http://www.meetup.com/de/Hamburg-Titanium/events/223965086/).
 ~~~
-var Layer = new MarkerManager({
+var Overlay = new MarkerManager({
     image : '/images/car2go.png',
     maxannotations : 200,
     points : [{lat:53.23,lng:10,title:'Title',subtitle:'SubTitle'},{}],
     map : mapview // reference to mapview
 });
-Layer.addEventListener('start',function(){
+Overlay.addEventListener('start',function(){
     // do something like showing spinner
 });
-Layer.addEventListener('complete',function(){
+Overlay.addEventListener('complete',function(){
 // do something like hiding spinner
 });
-Layer.destroy();   
+Overlay.destroy();   
 ~~~
 
 See at app.js for more details. Currently you can only staticly display annotations. 
